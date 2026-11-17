@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03 — Kuhn: La Estructura de las Revoluciones Científicas</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --quote-bg: #fff9e6;
+            --quote-border: #f1c40f;
+            --border: #e2e8f0;
+            --radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 24px;
+            }
+        }
+
+        /* Barra de navegación superior */
+        .reader-nav {
+            max-width: 850px;
+            margin: 0 auto 16px auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        .nav-home-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .step-pill {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+
+        .nav-btn {
+            background: var(--secondary-color);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: opacity 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-btn:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 24px 20px;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 40px 48px;
+            }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 1.6rem;
+            border-bottom: 4px solid var(--secondary-color);
+            padding-bottom: 15px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+            }
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 36px;
+            background-color: #f0f8ff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border-left: 5px solid var(--secondary-color);
+            font-size: 1.25rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+        }
+
+        p {
+            font-size: 1.05em;
+            text-align: left;
+        }
+
+        /* Contexto inicial */
+        .contexto {
+            background-color: #e8f4fd;
+            border: 1px solid #bce0fd;
+            padding: 18px 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .contexto h2 {
+            margin-top: 0;
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: #1e40af;
+        }
+
+        /* Citas textuales */
+        blockquote {
+            background-color: var(--quote-bg);
+            border-left: 5px solid var(--quote-border);
+            margin: 20px 0;
+            padding: 15px 20px;
+            font-style: italic;
+            color: #4b5563;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.02em;
+        }
+
+        blockquote cite {
+            display: block;
+            text-align: right;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #64748b;
+            font-style: normal;
+        }
+
+        /* Pasos del proceso */
+        .paso {
+            background-color: #f9fbfd;
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid var(--accent-color);
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .paso h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            font-size: 1.15em;
+        }
+
+        .paso h3 span {
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+
+        /* Analogías y cajas destacadas */
+        .analogia {
+            background-color: #e8f8f5;
+            border-left: 4px solid #1abc9c;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-radius: 6px;
+            font-style: italic;
+            color: #2c3e50;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #8e44ad;
+        }
+
+        /* Sección de descarga */
+        .descarga {
+            text-align: center;
+            margin-top: 40px;
+            padding: 24px;
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .btn-descarga {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 15px;
+            transition: background-color 0.2s;
+            word-break: break-word;
+        }
+
+        .btn-descarga:hover {
+            background-color: #2980b9;
+        }
+
+        /* Pie de navegación entre lecturas */
+        .reader-footer {
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.15s;
+        }
+
+        .btn-prev {
+            background: #f1f5f9;
+            color: #1e293b;
+            border: 1px solid var(--border);
+        }
+
+        .btn-prev:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-next {
+            background: var(--primary-color);
+            color: #ffffff;
+            margin-left: auto;
+        }
+
+        .btn-next:hover {
+            background: #1e293b;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barra de Navegación de Lectura -->
+<div class="reader-nav">
+    <a href="index.html" class="nav-home-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Inicio
+    </a>
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="02-Karl%20Popper_El%20Puente%20hacia%20Kuhn.html" style="color:#64748b; text-decoration:none; font-size:0.8rem;">← Anterior</a>
+        <span class="step-pill">Lectura 3 de 4</span>
+    </div>
+    <a href="04-La%20Estructura%20del%20Ensayo%20de%20Kuhn.html" class="nav-btn">
+        Siguiente →
+    </a>
+</div>
+
+<div class="container">
+    <h1>La Estructura de las Revoluciones Científicas</h1>
+    <p style="text-align: center; font-style: italic; color: #64748b; margin-bottom: 30px;">
+        Guía explicativa para estudiantes de Epistemología (Psicología)
+    </p>
+
+    <!-- CONTEXTO Y PROBLEMA -->
+    <div class="contexto">
+        <h2>1. El Contexto y el Problema</h2>
+        <p>Imagina que alguien te dice que la ciencia es como construir un edificio: los científicos van poniendo ladrillos (descubrimientos) uno sobre otro, de forma ordenada y acumulativa. Durante mucho tiempo, la gente creyó que la ciencia funcionaba así.</p>
+        <p>Pero <strong>Thomas Kuhn</strong>, un físico que se volvió historiador, se dio cuenta de que esto es <strong>falso</strong>. Al estudiar la historia real, vio que los científicos no avanzan en línea recta ni sumando cosas. Más bien, avanzan a <strong>trompicones</strong>, con peleas, crisis y cambios radicales de mentalidad. Escribió este libro en 1962 para demostrar que la ciencia no "acumula" conocimiento, sino que sufre <strong>Revoluciones</strong>.</p>
+    </div>
+
+    <!-- CONCEPTOS BÁSICOS -->
+    <h2>2. Los Conceptos Clave (El Diccionario de Kuhn)</h2>
+    <p>Para entender el libro, primero debes conocer dos palabras que Kuhn usa todo el tiempo:</p>
+    <ul>
+        <li><strong class="highlight">Paradigma:</strong> Son las "reglas del juego" o las "gafas" con las que los científicos ven el mundo en un momento histórico. Incluye teorías, leyes, técnicas y creencias compartidas. <em>(Kuhn los define como: "logros científicos universalmente aceptados que durante algún tiempo suministran modelos de problemas y soluciones a una comunidad de profesionales").</em></li>
+        <li><strong class="highlight">Ciencia Normal:</strong> Es el trabajo del día a día. Los científicos no buscan inventar cosas nuevas, sino <strong>resolver "rompecabezas"</strong> (problemas) usando las reglas del paradigma actual. <em>(Kuhn la define como: "la investigación basada firmemente en uno o más logros científicos pasados, logros que una comunidad científica particular reconoce durante algún tiempo como el fundamento de su práctica ulterior").</em></li>
+    </ul>
+
+    <!-- EL PROCESO PASO A PASO -->
+    <h2>3. El Viaje de la Ciencia: Paso a Paso</h2>
+    <p>Para entender cómo funciona la ciencia según Kuhn, imagina que la comunidad científica es un grupo de personas armando un <strong>rompecabezas gigante</strong>.</p>
+
+    <div class="paso">
+        <h3><span>1</span> La Ciencia Normal (El juego del rompecabezas)</h3>
+        <p>Los científicos tienen un Paradigma (la "foto de la caja" del rompecabezas). Todos están de acuerdo en cómo funciona el mundo. Se dedican a la Ciencia Normal: resolver pequeños problemas usando las reglas que ya conocen. Es un trabajo tranquilo, eficiente y muy útil. No buscan inventar cosas nuevas, solo encajar las piezas donde creen que van.</p>
+    </div>
+
+    <div class="paso">
+        <h3><span>2</span> La Anomalía (La pieza que no encaja)</h3>
+        <p>Un día, un científico encuentra una pieza de la naturaleza que <strong>no encaja</strong> en el paradigma. La naturaleza hace algo que las reglas no pueden explicar. A esto Kuhn lo llama <strong>Anomalía</strong>.</p>
+        <p>Al principio, los científicos intentan ignorarla o forzar la pieza para que entre. Piensan: <em>"El error debe ser mío, las reglas están bien"</em>.</p>
+        
+        <blockquote>
+            "El descubrimiento comienza tomando conciencia de una anomalía, es decir, reconociendo que la naturaleza ha violado de algún modo las expectativas inducidas por el paradigma que gobierna la ciencia normal."
+            <cite>— Thomas Kuhn, Cap. VI</cite>
+        </blockquote>
+    </div>
+
+    <div class="paso">
+        <h3><span>3</span> La Crisis (El rompecabezas se rompe)</h3>
+        <p>Las anomalías empiezan a acumularse. Son tantas piezas que no encajan, que los científicos se dan cuenta de que <strong>la "foto de la caja" está mal</strong>. El paradigma ya no sirve. Entran en un momento de <strong>Crisis</strong>. Empiezan a cuestionar todo, a pelear entre ellos y a proponer nuevas reglas.</p>
+    </div>
+
+    <div class="paso">
+        <h3><span>4</span> La Revolución Científica (Cambiar las reglas)</h3>
+        <p>Alguien (normalmente alguien joven o nuevo en el campo) propone un <strong>Nuevo Paradigma</strong>. Es como si dijera: <em>"Oye, no estamos armando un paisaje, ¡es un retrato!"</em>. Los defensores del viejo paradigma pelean con los del nuevo. A este cambio radical de reglas se le llama <strong>Revolución Científica</strong>.</p>
+
+        <blockquote>
+            "[Las revoluciones científicas son] aquellos episodios de desarrollo no acumulativo en los que un paradigma antiguo se ve sustituido en todo o en parte por otro nuevo incompatible con él."
+            <cite>— Thomas Kuhn, Cap. IX</cite>
+        </blockquote>
+    </div>
+
+    <div class="paso">
+        <h3><span>5</span> La Inconmensurabilidad (El malentendido)</h3>
+        <p>Aquí Kuhn dice algo muy polémico: los dos bandos <strong>no pueden entenderse solo con lógica o con datos</strong>. No es que uno tenga razón y el otro no; es que viven en <em>mundos diferentes</em>. No hablan el mismo idioma.</p>
+        
+        <blockquote>
+            "Cuando cambian los paradigmas, el propio mundo cambia con ellos. [...] Lo que antes de una revolución eran patos en el mundo del científico, son conejos después de ella."
+            <cite>— Thomas Kuhn, Cap. X</cite>
+        </blockquote>
+
+        <div class="analogia">
+            <strong>Analogía Visual:</strong> Es como ver una imagen que para ti es un pato y para tu amigo es un conejo (la famosa ilusión óptica). Los dos ven la misma mancha, pero sus cerebros interpretan cosas distintas. Los científicos cambian de paradigma como quien se pone unas gafas nuevas: de repente, ven el mundo de otra manera.
+        </div>
+    </div>
+
+    <div class="paso">
+        <h3><span>6</span> El Nuevo Mundo (El ciclo vuelve a empezar)</h3>
+        <p>¿Cómo termina la pelea? Los viejos científicos se jubilan o mueren. Las nuevas generaciones aprenden el <strong>Nuevo Paradigma</strong> desde la universidad. Los libros de texto se reescriben para ocultar la crisis y hacer parecer que el nuevo paradigma fue un "descubrimiento lógico" y acumulativo.</p>
+        <p>La ciencia vuelve a la calma. Todo el mundo vuelve a jugar al rompecabezas con las nuevas reglas (nueva Ciencia Normal). El ciclo se repetirá en el futuro.</p>
+
+        <blockquote>
+            "El progreso científico no es de un tipo diferente del progreso en otros terrenos, pero el hecho de que la mayor parte del tiempo no haya escuelas rivales que pongan en tela de juicio los objetivos y normas de los demás, hace mucho más fácil de ver el progreso de una comunidad de ciencia normal."
+            <cite>— Thomas Kuhn, Cap. XIII</cite>
+        </blockquote>
+    </div>
+
+    <!-- EL CASO DE LA PSICOLOGÍA -->
+    <h2>4. Un caso práctico: ¿Es la psicología una ciencia?</h2>
+    <p>Desde la perspectiva de Kuhn, la respuesta es un <strong>"sí, pero..."</strong>. La psicología es una ciencia, pero es una ciencia <strong>"pre-paradigmática"</strong> o <strong>"inmadura"</strong>. Está en la misma etapa en la que estuvo la física antes de que Newton o Einstein pusieran orden.</p>
+    
+    <p>¿Por qué? Porque en la psicología <strong>no hay un solo paradigma dominante</strong>. Conviven muchas "fotos de la caja" diferentes y que se pelean entre sí:</p>
+    <ul>
+        <li>El <strong>Conductismo</strong> (que dice que solo importa lo observable).</li>
+        <li>El <strong>Psicoanálisis</strong> (que dice que importa el inconsciente).</li>
+        <li>La <strong>Psicología Cognitiva</strong> (que dice que importa cómo procesamos la información).</li>
+        <li>La <strong>Psicología Humanista</strong>, etc.</li>
+    </ul>
+
+    <p>Como no hay un acuerdo básico, los psicólogos no pueden hacer "Ciencia Normal" tranquilamente. En lugar de eso, se la pasan discutiendo los fundamentos: <em>¿Qué es la mente? ¿Qué métodos son válidos? ¿Es mejor medir o interpretar?</em></p>
+
+    <blockquote>
+        "En algunas partes de la biología... siendo aún una cuestión abierta qué partes de la ciencia social habrían adquirido ya tales paradigmas."
+        <cite>— Thomas Kuhn, Cap. II</cite>
+    </blockquote>
+
+    <blockquote>
+        "Al margen de ambigüedades ocasionales, los paradigmas de una comunidad científica madura se pueden detectar con relativa facilidad. [...] La adquisición de un paradigma y del tipo de investigación más esotérico que éste permite es un signo de madurez en el desarrollo de un campo científico dado."
+        <cite>— Thomas Kuhn, Cap. II</cite>
+    </blockquote>
+
+    <p>Kuhn también notó que los psicólogos son de los pocos científicos que se la pasan preguntándose si su campo es realmente una ciencia. Un físico no se levanta preguntando <em>"¿Será que la física es una ciencia?"</em>, pero un psicólogo sí. Esto ocurre porque, al no tener un paradigma unificador, el debate sobre "qué es la psicología" sigue abierto.</p>
+
+    <div class="analogia">
+        <strong>En resumen:</strong> La psicología está llena de anomalías, crisis y escuelas rivales. Kuhn diría que es una ciencia <strong>joven</strong> que aún está esperando a su "Newton" para que unifique todas las teorías bajo un mismo paradigma. Hasta entonces, sus "revoluciones" no la llevan a un consenso, sino que solo crean nuevas escuelas que compiten con las anteriores.
+    </div>
+
+    <!-- CONCLUSIÓN -->
+    <h2>5. Conclusión: ¿Qué nos enseña esto?</h2>
+    <p>Kuhn nos enseña que la ciencia no es un camino recto hacia la "Verdad Absoluta". Es más bien como la <strong>evolución de las especies de Darwin</strong>: no avanza hacia un objetivo final perfecto, sino que simplemente se adapta y cambia constantemente a partir de lo que ya conoce. Los científicos no son seres perfectos que solo usan la lógica, sino personas que se aferran a sus ideas y que a veces necesitan una "revolución" para poder ver el mundo con otros ojos.</p>
+
+    <!-- DESCARGAR LIBRO -->
+    <div class="descarga">
+        <h3 style="margin-top:0; color: #1e3a8a;">¿Quieres leer el libro original?</h3>
+        <p>Puedes descargar el texto completo en formato PDF de manera gratuita desde el repositorio de la Universidad Nacional de La Plata.</p>
+        <a href="https://perio.unlp.edu.ar/catedras/comunicacionyrecepcion/wp-content/uploads/sites/210/2023/03/La-estructura-de-las-revoluciones-cientificas-TK_compressed.pdf" target="_blank" rel="noopener noreferrer" class="btn-descarga">
+            📥 Descargar el libro en PDF
+        </a>
+    </div>
+
+    <!-- Navegación al pie -->
+    <footer class="reader-footer">
+        <a href="02-Karl%20Popper_El%20Puente%20hacia%20Kuhn.html" class="footer-btn btn-prev">
+            ← 02. Karl Popper
+        </a>
+        <a href="04-La%20Estructura%20del%20Ensayo%20de%20Kuhn.html" class="footer-btn btn-next">
+            Siguiente: Estructura del Ensayo →
+        </a>
+    </footer>
+</div>
+
+</body>
+</html>

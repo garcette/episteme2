@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epistemología — Plataforma de Lecturas y Desempeño</title>
+    <meta name="description" content="Plataforma de estudio y registro académico para la materia de Epistemología (Psicología) 2-2026. Lecturas de Kuhn y Popper, y consulta de desempeño EC2 y EC3.">
+    <meta name="theme-color" content="#1e293b">
+    <style>
+        :root {
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-subtle: #f1f5f9;
+            --border: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent: #1e293b;
+            --accent-hover: #334155;
+            --blue: #2563eb;
+            --blue-light: #eff6ff;
+            --blue-border: #bfdbfe;
+            --purple: #7c3aed;
+            --purple-light: #f5f3ff;
+            --purple-border: #ddd6fe;
+            --orange: #ea580c;
+            --orange-light: #fff7ed;
+            --green: #059669;
+            --green-light: #ecfdf5;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 84px; /* Espacio para barra de navegación móvil */
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 32px 24px;
+            }
+        }
+
+        /* Hero Header */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 28px 20px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding: 40px 36px;
+                margin-bottom: 32px;
+            }
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(59, 130, 246, 0) 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #93c5fd;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .hero h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            max-width: 650px;
+            line-height: 1.5;
+        }
+
+        /* Sección títulos */
+        .section-header {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .section-header h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-header p {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+        }
+
+        /* Cuadrícula de Desempeño Académico */
+        .grid-desempeno {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        @media (min-width: 680px) {
+            .grid-desempeno {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card-desempeno {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card-desempeno:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-hover);
+        }
+
+        .card-desempeno-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .tag-ec {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .tag-ec2 {
+            background: var(--blue-light);
+            color: var(--blue);
+            border: 1px solid var(--blue-border);
+        }
+
+        .tag-ec3 {
+            background: var(--purple-light);
+            color: var(--purple);
+            border: 1px solid var(--purple-border);
+        }
+
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-icon-ec2 { background: var(--blue-light); color: var(--blue); }
+        .card-icon-ec3 { background: var(--purple-light); color: var(--purple); }
+
+        .card-desempeno h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .card-desempeno p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--blue);
+        }
+
+        .card-desempeno:nth-child(2) .card-action {
+            color: var(--purple);
+        }
+
+        /* Trayecto de Lecturas (Secuencia numerada) */
+        .readings-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .reading-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.15s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .reading-item:hover {
+            border-color: #94a3b8;
+            transform: translateX(3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .reading-num {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .reading-item:nth-child(1) .reading-num { color: #0284c7; background: #e0f2fe; border-color: #bae6fd; }
+        .reading-item:nth-child(2) .reading-num { color: #ea580c; background: #ffedd5; border-color: #fed7aa; }
+        .reading-item:nth-child(3) .reading-num { color: #2563eb; background: #dbeafe; border-color: #bfdbfe; }
+        .reading-item:nth-child(4) .reading-num { color: #7c3aed; background: #f3e8ff; border-color: #e9d5ff; }
+
+        .reading-content {
+            flex-grow: 1;
+        }
+
+        .reading-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .reading-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.35;
+            margin-bottom: 4px;
+        }
+
+        .reading-desc {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        .reading-arrow {
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            align-self: center;
+            transition: transform 0.15s ease, color 0.15s ease;
+        }
+
+        .reading-item:hover .reading-arrow {
+            color: var(--text-primary);
+            transform: translateX(3px);
+        }
+
+        /* Banner de inicio rápido */
+        .start-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .start-text h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .start-text p {
+            font-size: 0.84rem;
+            color: #94a3b8;
+        }
+
+        .btn-start {
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s;
+        }
+
+        .btn-start:hover {
+            background: #1d4ed8;
+        }
+
+        /* Pie de página */
+        .site-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Barra de Navegación Fija Inferior (Mobile First Thumb Bar) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 12px;
+            z-index: 100;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none; /* En escritorio se usa la navegación natural */
+            }
+            body {
+                padding-bottom: 24px;
+            }
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.72rem;
+            font-weight: 600;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: color 0.15s;
+        }
+
+        .bottom-nav-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--blue);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Encabezado Principal / Hero -->
+    <header class="hero">
+        <span class="hero-badge">Gestión 2-2026 · Carrera de Psicología</span>
+        <h1>Epistemología: Control Académico y Lecturas</h1>
+        <p>Espacio oficial para la consulta de desempeño estudiantil y la lectura estructurada de Thomas Kuhn y Karl Popper.</p>
+    </header>
+
+    <!-- Sección 1: Desempeño Académico -->
+    <section>
+        <div class="section-header">
+            <h2>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                Registros de Desempeño
+            </h2>
+            <p>Consulta tu estado de habilitación</p>
+        </div>
+
+        <div class="grid-desempeno">
+            <!-- Tarjeta EC2 -->
+            <a href="desempeñoEC2.html" class="card-desempeno">
+                <div>
+                    <div class="card-desempeno-header">
+                        <span class="tag-ec tag-ec2">Elemento 2</span>
+                        <div class="card-icon card-icon-ec2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                    </div>
+                    <h3>Desempeño EC2</h3>
+                    <p>Registro final con asistencia (mín. 80%), cumplimiento de 8 tareas (mín. 60%), calificación de examen y nota final redondeada.</p>
+                </div>
+                <div class="card-action">
+                    Abrir Desempeño EC2 →
+                </div>
+            </a>
+
+            <!-- Tarjeta EC3 -->
+            <a href="desempeñoEC3.html" class="card-desempeno">
+                <div>
+                    <div class="card-desempeno-header">
+                        <span class="tag-ec tag-ec3">Elemento 3</span>
+                        <div class="card-icon card-icon-ec3">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        </div>
+                    </div>
+                    <h3>Desempeño EC3</h3>
+                    <p>Seguimiento de Asistencia y entregas de ensayo: Argumentos (Jue 19), Intro y Conclusión (Mar 24) y Borrador Completo (Jue 26).</p>
+                </div>
+                <div class="card-action">
+                    Abrir Desempeño EC3 →
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Banner de Inicio Rápido de Lectura -->
+    <div class="start-banner">
+        <div class="start-text">
+            <h4>¿Preparando tu ensayo de epistemología?</h4>
+            <p>Sigue el itinerario formativo secuencial desde el positivismo hasta la tesis de Kuhn.</p>
+        </div>
+        <a href="01-El%20Positivismo%20L%C3%B3gico.html" class="btn-start">
+            Comenzar con la Lectura 1 →
+        </a>
+    </div>
+
+    <!-- Sección 2: Trayecto de Lecturas Guiadas -->
+    <section>
+        <div class="section-header">
+            <h2>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Sección de Lecturas Secuenciales
+            </h2>
+            <p>4 módulos en orden progresivo</p>
+        </div>
+
+        <div class="readings-container">
+            <!-- Lectura 1 -->
+            <a href="01-El%20Positivismo%20L%C3%B3gico.html" class="reading-item">
+                <div class="reading-num">01</div>
+                <div class="reading-content">
+                    <span class="reading-badge">Punto de partida · El Círculo de Viena</span>
+                    <h3 class="reading-title">El Positivismo Lógico: El Blanco de Kuhn</h3>
+                    <p class="reading-desc">¿A qué responde? Empirismo radical, el criterio de verificación y la visión acumulativa y lineal de la ciencia contrastada con Kuhn.</p>
+                </div>
+                <div class="reading-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </div>
+            </a>
+
+            <!-- Lectura 2 -->
+            <a href="02-Karl%20Popper_El%20Puente%20hacia%20Kuhn.html" class="reading-item">
+                <div class="reading-num">02</div>
+                <div class="reading-content">
+                    <span class="reading-badge">La transición crítica · Conjeturas y Refutaciones</span>
+                    <h3 class="reading-title">Karl Popper: El Puente hacia Kuhn</h3>
+                    <p class="reading-desc">El problema de la demarcación, la falsabilidad frente a las pseudociencias, el mito de la inducción y el preludio del debate con Kuhn.</p>
+                </div>
+                <div class="reading-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </div>
+            </a>
+
+            <!-- Lectura 3 -->
+            <a href="03-La%20Estructura%20de%20las%20Revoluciones%20Cient%C3%ADficas.html" class="reading-item">
+                <div class="reading-num">03</div>
+                <div class="reading-content">
+                    <span class="reading-badge">Obra cumbre · 1962</span>
+                    <h3 class="reading-title">La Estructura de las Revoluciones Científicas</h3>
+                    <p class="reading-desc">Paradigmas, anomalías, crisis, revoluciones, inconmensurabilidad y análisis especial: ¿es la Psicología una ciencia según Kuhn?</p>
+                </div>
+                <div class="reading-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </div>
+            </a>
+
+            <!-- Lectura 4 -->
+            <a href="04-La%20Estructura%20del%20Ensayo%20de%20Kuhn.html" class="reading-item">
+                <div class="reading-num">04</div>
+                <div class="reading-content">
+                    <span class="reading-badge">Síntesis y estructura de redacción</span>
+                    <h3 class="reading-title">La Estructura del Ensayo de Kuhn</h3>
+                    <p class="reading-desc">Estructura filosófica condensada: Problema, Tesis, 4 Argumentos clave y Conclusión para redactar y defender tu ensayo académico.</p>
+                </div>
+                <div class="reading-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Pie de página general -->
+    <footer class="site-footer">
+        <p><strong>Cátedra de Epistemología</strong> · Carrera de Psicología · Gestión 2-2026</p>
+        <p style="margin-top: 4px;">Publicación web optimizada para lectura en dispositivos móviles y alojamiento en Netlify.</p>
+    </footer>
+</div>
+
+<!-- Barra fija inferior para celulares -->
+<nav class="bottom-nav" aria-label="Navegación móvil">
+    <a href="index.html" class="bottom-nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Inicio</span>
+    </a>
+    <a href="desempeñoEC2.html" class="bottom-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>EC2</span>
+    </a>
+    <a href="desempeñoEC3.html" class="bottom-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+        <span>EC3</span>
+    </a>
+    <a href="01-El%20Positivismo%20L%C3%B3gico.html" class="bottom-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span>Lecturas</span>
+    </a>
+</nav>
+
+</body>
+</html>
